@@ -1,0 +1,31 @@
+Due to the nature of the code test and very limited time spent on it the number of assumptions and shortcuts was taken:
+
+1.	The implementation preserves the original setup of projects in solution (target framework, referenced libraries).
+	It also sticks to the synchronous execution following the AuthManagerIntegrationTest. 
+
+2.	User class uses string for UserName and Password given no specific requirements and for simplicity (KISS and YAGNI principles).
+
+3.	Requirements A), B) and C) are satisfied by IUserAuthManager methods implemented by UserAuthManager class.
+
+4.	Requirement D) is satisfied by providing the IValidation public interface and making UserAuthManager accepting a collection of its implementations (making use of Dependency Injection).
+	Additionally two sample implementations of IValidation (UserNameIsValidEmailAddressValidation and UserNameIsValidActiveDirectoryAccountValidation) are provided and used in integration tests.
+
+5.	IUserAuthManager and IUserRepository together with implementing classes are specialised to operate on User type.
+	If needed they could be turned into generic interfaces with little effort.
+
+6.	SqlUserRepository is a specialised SQL Server implementation of the public IUserRepository interface.
+	UserAuthManager takes IUserRepository implementation as one of its constructor parameters which allows for an easy change of underlying database technology via Dependency Injection.
+
+7.	UserName and Password are stored in database as NVARCHAR types of arbitrary length (again for simplicity).
+	For any real usecase the sizes of columns should be a subject of agreement and corresponding input validation should be provided.
+	For any real database passwords should not be stored in plaintext but in an encrypted form as showed https://www.mssqltips.com/sqlservertip/4037/storing-passwords-in-a-secure-way-in-a-sql-server-database/
+
+8.	Database interface uses stored procedures corresponding to IRepository methods.
+	Such interface would allow a relatively easy change to work with encrypted passwords (as mentioned in the previous point).
+
+9.	AuthManagerIntegrationTest requires a database published to SQL Server instance.
+	A valid database connection string needs to be specified in _connectionString field. 
+
+10.	I added a UnitTests project for my own benefit of gaining confidence while working on the test solution.
+	It uses newer .NET Framework and MsTestV2 for convenience.
+	The scope and code coverage is far inferior to what I would provide for any real project.

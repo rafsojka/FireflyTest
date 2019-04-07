@@ -1,0 +1,34 @@
+TODO:
+
+The objective of the exercise is for you to design and develop a basic authentication system and demonstrate the ability to write well-structured, extensible and maintainable code.
+Feel free to use appropriate design patters where necessary and try to keep the code clear and concise. 
+In order to complete the exercise you should work on the following 3 projects of the solution: a class library, a database and a unit test project.
+
+---------------------------------------------------------------------
+STEP 1: Implement the code in the class library project (AuthManager)
+---------------------------------------------------------------------
+In the "AuthManager" class library project, you should add the necessary classes to manage a basic authentication system.
+The "User" class should only have two attributes (UserName and Password) and you should choose appropriate types.
+The system should not allow for duplicate users (with respect to the username)
+
+The system should satisfy the following functional requirements:
+A) It should be possible to create new users
+B) It should be possible to search for an existing user
+C) It should be possible to authenticate a user with correct credentials
+D) It should be possible for a developer using the class library (who can't modify it because, for instance, doesn't have access to the code) to implement a custom UserName or password validation class
+
+Additionally:
+During the user creation phase, the system should verify and validate UserName and Password against custom requirements (for instance minimum lenght, special characters etc.)
+Please do not use Entity Framework, any other ORM or third party libraries
+
+
+------------------------------------------------------------------------------------
+STEP 2: Implement the code in the SQL Server database project (AuthManager.Database)
+------------------------------------------------------------------------------------
+Use the project "AuthManager.Database" to create the database, including all the necessary objects (tables, indexes, keys, stored procedures etc.)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+STEP 3: Implement the code of the class required to satisfy the requirements of the UnitTest project (in the AuthManagerTest class)
+-----------------------------------------------------------------------------------------------------------------------------------
+Write the integration tests in terms of a client consuming the class library
